@@ -23,3 +23,10 @@ document.addEventListener('CABLES.jsLoaded', function (event) {
         "canvas":{"alpha":true,"premultipliedAlpha":true} // make canvas transparent
     });
 });
+
+document.addEventListener("keydown", (event) => {
+    if (event.isComposing || event.keyCode == 80) {
+      location.reload();
+    }
+  });
+  
