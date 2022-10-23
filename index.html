@@ -10,13 +10,20 @@
     <meta itemprop="image" content="screenshot.png">
     <meta name="description" content="made with cables" />
 
+    <!-- bootstrap v5.2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    
+    <!-- adobe fonts package -->
+    <link rel="stylesheet" href="https://use.typekit.net/wcs6mhl.css">
+    
+    <!-- custom styles -->
     <style>
         body {
             margin: 0;
             background-color: #000;
             color: #fff;
             font-family: Helvetica, Arial, sans-serif;
-            overflow: hidden; /* disable scrolling / rubberband effect on mobile */
+            overflow: hidden;
         }
 
         canvas {
@@ -26,7 +33,6 @@
         }
 
         * {
-            /* disable on touch highlights of html elements, especially on mobile! */
             -webkit-tap-highlight-color: transparent;
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -35,45 +41,70 @@
             user-select: none;
         }
 
-    </style>
+        .sidebar-cables{
+            z-index: 0 !important;
+        }
+        div{
+            z-index: 0 !important;
+        }
 
+        #top-text{
+            position: absolute !important;
+            font-family: roc-grotesk-wide, sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            top: 30px;
+            z-index: 6 !important;
+            padding-left: 20px !important;
+        }
+        #interactive-text{
+            position: absolute !important;
+            z-index: 6 !important;
+            font-family: roc-grotesk-wide, sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            transform: translateY(-50%, -50%);
+            top: 45%;
+            right: 40px;
+        }
+        #bottom-text{
+            position: absolute !important;
+            z-index: 6 !important;
+            font-family: roc-grotesk-wide, sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            bottom: 15px;
+            font-size: 20px;
+            padding-left: 25px !important;
+            line-height: 1.7 !important;
+        }
+        #instruction-text{
+            position: absolute !important;
+            z-index: 6 !important;
+            font-family: roc-grotesk-wide, sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            transform: translateY(-50%, -50%);
+            top: 45%;
+            padding-left: 25px !important;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- webgl animation - output -->
     <canvas id="glcanvas" width="100vw" height="100vh" tabindex="1"></canvas>
 
-    
+    <!-- title -->
+    <div class="container-fluid titles">
+        <h2 id="top-text">Hirawela by <span style="font-size: 25px; margin-left: 10px; margin-right: 10px;">✹</span> Xyren</h2>
+        <h4 id="interactive-text">Play Again (P)</h4>
+        <p id="instruction-text">click the dropdown 🡥 <br> play with your own values</p>
+        <h3 id="bottom-text">Real-Time Visualizer by <br> Vihan Perera</h3>
+    </div>
+
+    <!-- calling relevant params -->
     <script type="text/javascript" src="js/patch.js" async></script>
-    
-
-    <script>
-
-        // disable rubberband effect on mobile devices
-        document.getElementById('glcanvas').addEventListener('touchmove', (e)=>{ e.preventDefault(); }, false);
-
-
-        function patchInitialized(patch) {
-            // You can now access the patch object (patch), register variable watchers and so on
-        }
-
-        function patchFinishedLoading(patch) {
-            // The patch is ready now, all assets have been loaded
-        }
-
-        document.addEventListener('CABLES.jsLoaded', function (event) {
-            CABLES.patch = new CABLES.Patch({
-                patch: CABLES.exportedPatch,
-                "prefixAssetPath": "",
-                "assetPath": "assets/",
-                "jsPath": "js/",
-                "glCanvasId": "glcanvas",
-                "glCanvasResizeToWindow": true,
-                "onPatchLoaded": patchInitialized,
-                "onFinishedLoading": patchFinishedLoading,
-                "canvas":{"alpha":true,"premultipliedAlpha":true} // make canvas transparent
-            });
-        });
-    </script>
+    <script src="js/script.js"></script>
 </body>
-
 </html>
